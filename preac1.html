@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>preAC1</title>
+</head>
+<body>
+    
+    insira a distância percorrida em KM: <input type="text" id="ipt_distancia"> <br>
+    insira a duração da viagem em minutos: <input type="number" id="minutos"> <br>
+    quantidade de passageiros: <input type="number" id="ipt_passageiros"> <br>
+    horario de início da viagem: <input type="number" id="ipt_inicio"> <br>
+    
+    <button onclick="calcular()"> Realizar viagem </button>
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+    function calcular() {
+        var distanciaKM = Number (ipt_distancia.value);
+        var duracaoMin = Number (minutos.value);
+        var passageiros = Number (ipt_passageiros.value);
+        var inicio = Number (ipt_inicio.value);
+        var custo = Number (0.77 * distanciaKM);
+        var estimativaTempo = Number (1.8 * distanciaKM);
+        var acrescimo = 0;
+        var desconto = 0;
+        var passageiroExtra = 0;
+        var bonus = 0;
+        var adicional = 0;
+
+
+        // usei 2 parenteses pq primeiro o codigo precisa descobrir quanto é 10% da estimativaTempo + estimativa tempo
+        // para depois comparar duracaoMin >= estimativa tempo + 10%
+        if ( duracaoMin >= (estimativaTempo * 0.1 + estimativaTempo)) {
+
+            var acrescimo = Number (custo * 0.07);
+        }
+
+        if ( duracaoMin < (estimativaTempo - estimativaTempo * 0.1)) {
+
+            var desconto = Number (custo * 0.08);
+        }
+
+        if ( passageiros > 1) {
+
+            var passageiroExtra = 3 * (passageiros - 1);
+
+        }
+
+
+        if (inicio >= 0 &&  inicio <=6) {
+
+            var bonus = Number ( custo * 0.09);
+        }
+
+        if (inicio >20 && inicio >23) {
+            var adicional = Number ( custo * 0.11);
+        }
+
+        var custoTotal = Number (custo + acrescimo - desconto + passageiroExtra - bonus + adicional);
+        
+        div_mensagem.innerHTML = `a viagem foi iniciada  ás ${inicio} horas 
+        e tinha estimativa de ${estimativaTempo} minutos e durou ${duracaoMin} minutos,
+        percorrendo ${distanciaKM}KM, com ${passageiros} passageiros, totalizando
+        R$${custoTotal} do preço da corrida.`
+
+    }
+
+
+
+
+
+
+
+
+
+
+</script>

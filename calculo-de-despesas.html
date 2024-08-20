@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despesas</title>
+</head>
+
+<body>
+
+    <h1> Calcule suas despesas fixas mensais </h1>
+
+    <p> Insira a quantidade de energia consumida em kWh: <input type="number" id="ipt_energia"></p>
+    <p> Insira a bandeira tarifária de energia (vermelha, amarela ou verde): <input type="text" id="ipt_bandeira"></p>
+    <p> Insira o volume de água consumido (em litros): <input type="number" id="ipt_agua"></p>
+    <p> insira a quantidade de vazamentos de água na casa: <input type="number" id="ipt_vazamento"></p>
+    <p> Insira o volume de gás consumido (em litros): <input type="number" id="ipt_gas"></p>
+    <p> Insira a quantidade de megabyte do plano de internet <input type="number" id="ipt_internet"></p>
+    <p> Possui uma linha telefônica vinculada ao plano de internet? (responda com sim ou nao) <input type="text"
+            id="ipt_telefone"></p>
+
+    <button onclick="calcular()"> Calcular despesas fixas </button>
+    <div id="div_mensagem"></div>
+
+</body>
+
+</html>
+<script>
+
+    function calcular() {
+        var energia = ipt_energia.value;
+        var bandeira = ipt_bandeira.value;
+        var agua = ipt_agua.value;
+        var vazamento = ipt_vazamento.value;
+        var gas = ipt_gas.value;
+        var internet = ipt_internet.value;
+        var telefone = ipt_telefone.value;
+
+        if (bandeira == "verde") { var Bverde = Number(0.75 * energia); }
+
+        if (bandeira == "amarela") { var Bamarela = Number(0.90 * energia); }
+
+        if (bandeira == "vermelha") { var Bvermelha = Number(1 * energia); }
+
+        if (energia <= 50) {
+
+            var desconto = Number(energia - energia * 10 / 100);
+        }
+
+        var Total_energia = Number(Bverde + Bamarela + Bvermelha + desconto);
+
+        var baseAgua = Number(3.5 * agua);
+        var vazamentos = (10 * vazamento);
+        var total_agua = Number(vazamentos + baseAgua);
+
+        var baseGas = Number(2.5 * gas);
+
+        var baseNet = Number(0.80 * internet);
+
+        if (telefone == "sim") {
+
+            var acrescimo = Number(baseNet + baseNet * 25 / 100);
+        }
+
+
+        if (telefone == "nao") {
+
+            var desconto = Number(baseNet - baseNet * 7.5 / 100);
+        }
+
+
+        var total_internet = Number(baseNet + acrescimo + desconto);
+
+
+
+        var Total_Despesas = Number(Total_energia + total_agua + baseGas + total_internet);
+
+
+        div_mensagem.innerHTML = (` <p> Com consumo de ${energia} na bandeira ${bandeira}, a conta de energia totaliza R$${Total_energia}. </p>
+     <p> Com consumo de ${agua} litros de água contendo ${vazamento} vazamentos, a conta de água totaliza R$${total_agua}. </p>
+     <p> Com consumo de ${gas} litros de gás, a conta de gás totaliza R$${baseGas}. </p>
+     <p> Com consumo de ${internet} megabyte de internet, o valor do plano de internet/telefone totaliza R$${total_internet}. </p>
+     
+     <p> Seu gasto total de despesas mensal: R$${Total_Despesas}. </p>`)
+
+
+
+    }
+
+</script>

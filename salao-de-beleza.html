@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Selecione o Serviço: <select id="select_servico">
+        <option value="#">Escolha uma opção</option>
+        <option value="manicure">Manicure</option>
+        <option value="barba">Barba</option>
+        <option value="cabelo">Cabelo</option>
+    </select> <br>
+
+
+    Selecione o Dia: <select id="select_dia">
+        <option value="#">Escolha uma opção</option>
+        <option value="segunda"> Segunda-feira </option>
+        <option value="terca"> Terça-feira </option>
+        <option value="quarta"> Quarta-feira </option>
+        <option value="quinta"> Quinta-feira </option>
+        <option value="sexta"> Sexta-feira </option>
+        <option value="sabado"> Sábado </option>
+        <option value="domingo"> Domingo </option>
+    </select> <br>
+
+    Selecione o Horário: <select id="select_horario">
+        <option value="#">Escolha uma opção</option>
+        <option value="0"> 00:00h </option>
+        <option value="1"> 01:00h </option>
+        <option value="2"> 02:00h </option>
+        <option value="3"> 03:00h </option>
+        <option value="4"> 04:00h </option>
+        <option value="5"> 05:00h </option>
+        <option value="6"> 06:00h </option>
+        <option value="7"> 07:00h </option>
+        <option value="8"> 08:00h </option>
+        <option value="9"> 09:00h </option>
+        <option value="10"> 10:00h </option>
+        <option value="11"> 11:00h </option>
+        <option value="12"> 12:00h </option>
+        <option value="13"> 13:00h </option>
+        <option value="14"> 14:00h </option>
+        <option value="15"> 15:00h </option>
+        <option value="16"> 16:00h </option>
+        <option value="17"> 17:00h </option>
+        <option value="18"> 18:00h </option>
+        <option value="19"> 19:00h </option>
+        <option value="20"> 20:00h </option>
+        <option value="21"> 21:00h </option>
+        <option value="22"> 22:00h </option>
+        <option value="23"> 23:00h </option>
+    </select> <br>
+
+    Qual será a recorrência de atendimentos em 1 ano? <input type="number" id="input_recorrencia"> <br>
+
+    <button onclick="realizar()">Realizar Orçamento</button>
+
+    <div id="div_resultado"></div>
+
+</body>
+
+</html>
+
+<script>
+    function realizar() {
+        var servico = select_servico.value;
+        var dia = select_dia.value;
+        var hr = Number(select_horario.value);
+        var recorrência = input_recorrencia.value;
+        var precoMani = Number(20);
+        var precoBarba = Number(15);
+        var precoCabelo = Number(30);
+        var descontoMani = Number(20 - 4);
+        var descontoBarba = Number(15 - 3);
+        var descontoCabelo = Number(30 - 5);
+
+        div_resultado.innerHTML = "";
+
+        if (servico == '#' || dia == '#' || hr == '#') {
+            div_resultado.innerHTML = `<br> PREENCHA TODOS OS CAMPOS PARA PROSEGUIR`;
+        }
+
+         for (var cont = 1; cont <= recorrência; cont++) {
+            if (servico == 'manicure' && dia == 'terca' || dia == 'quinta') {
+                div_resultado.innerHTML += `Atendimento ${cont} - Serviço: Manicure | Dia: ${dia} | Hora: ${hr}h | Preço serviço: R$20,00 | Desconto: R$4,00 | Preço final: R${descontoMani}  <br><br>`
+            } }
+
+        
+        if (servico == 'manicure' && dia == 'segunda' || servico == 'manicure' && dia == 'quarta' || servico == 'manicure' && dia == 'sexta' || servico == 'manicure' && dia == 'sabado' || servico == 'manicure' && dia == 'domingo') {
+            div_resultado.innerHTML += `Atendimento ${cont} - Serviço: Manicure | Dia: ${dia} | Hora: ${hr}h | Preço serviço: R$20,00 | Desconto: R$0 | Preço final: R${precoMani} <br><br>`
+        }
+
+        else if (servico == 'barba' && dia == 'segunda' || servico == 'barba' && dia == 'quarta') {
+                div_resultado.innerHTML += `Atendimento ${cont} - Serviço: Barba | Dia: ${dia} | Hora: ${hr}h | Preço serviço: R$15,00 | Desconto: R$3,00 | Preço final: R${descontoBarba}  <br><br>`
+            }
+
+        
+       else if (servico == 'barba' && dia == 'terca' || servico == 'barba' && dia == 'quinta' || servico == 'barba' && dia == 'sexta' ||servico == 'barba' && dia == 'sabado' ||servico == 'barba' &&  dia == 'domingo') {
+            div_resultado.innerHTML += `Atendimento ${cont} - Serviço: Barba | Dia: ${dia} | Hora: ${hr}h | Preço serviço: R$15,00 | Desconto: R$0 | Preço final: R${precoBarba}  <br><br> `
+        }
+
+        else if (servico == 'cabelo' && dia == 'sexta' || servico == 'cabelo' && dia == 'sabado' || servico == 'cabelo' && dia == 'domingo') {
+                div_resultado.innerHTML += `Atendimento ${cont} - Serviço: Cabelo | Dia: ${dia} | Hora: ${hr}h | Preço serviço: R$30,00 | Desconto: R$5,00 | Preço final: R${descontoCabelo}  <br><br>`
+            }
+
+        
+        else {
+            div_resultado.innerHTML += `Atendimento ${cont} - Serviço: cabelo | Dia: ${dia} | Hora: ${hr}h | Preço serviço: R$30,00 | Desconto: R$0 | Preço final: R${precoCabelo}  <br><br>`
+        }
+
+
+
+        
+        if (servico == 'manicure' && hr <8 && hr >16) {
+            div_resultado.innerHTML += `O serviço selecionado não está disponível para esse horario.`;
+        }
+        if (servico == 'barba' && hr <13 && hr >20 ) {
+            div_resultado.innerHTML += `<br>O serviço selecionado não está disponível para esse horario.`;
+        }
+        if (servico == 'cabelo' && hr <0 && hr >23) {
+            div_resultado.innerHTML += `<br>O serviço selecionado não está disponível para esse horario.`;
+        }
+
+        if (servico == manicure && dia == 'terca' || dia == 'quinta') {
+            precoMani = descontoMani;
+        }
+
+        if (servico == barba && dia == 'segunda' || dia == 'quarta') {
+            precoBarba = descontoBarba;
+        }
+
+        if (servico == cabelo && dia == 'sexta' || dia == 'sabado' || dia == 'domingo') {
+            precoCabelo = descontoCabelo;
+        }
+
+
+}
+
+</script>

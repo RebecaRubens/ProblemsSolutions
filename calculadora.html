@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)file:///C:/Users/Marise%20Miranda/Downloads/Marises%20Machine.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+
+    <title>CALCULADORA</title>
+</head>
+
+<body bgcolor="#BC8F8F">
+    
+        <div class="titulo"><h1>CALCULADORA</h1></div>
+<div class="container">
+<br><br>
+
+       <div class="minititulo"> <h3>Decimal</h3> </div>
+        <input id="demo1" class="input" type="text" placeholder="Digite o valor em decimal">
+
+<br><br>
+
+        <div class="minititulo"><h3>Converter para:</h3></div>
+
+        <select class="select" id="inpSelect">
+                <option value="0">Escolha a base</option>
+                <option value="1">Octal</option>
+                <option value="2">Hexadecimal</option>
+                <option value="3">Binario</option>
+        </select>
+
+       
+<br>
+
+ <center><button onclick="converter()">Converter</button> </center>
+    
+        <div id="divMsg" class="result"></div>
+</div>
+        
+</body>
+</html>
+<script>
+
+        function converter() {
+            
+                var select = inpSelect.value
+                
+                var decimal = Number (demo1.value);
+        
+                var octal = decimal.toString(8);
+        
+                var hexadecimal = decimal.toString(16);
+        
+                var binaria = decimal.toString(2);
+        
+                console.log (decimal);
+                console.log (octal);
+                console.log (hexadecimal);
+                console.log (binaria);
+        
+                if (select == 0) {divMsg.innerHTML = `Opção invalida`}
+                if (select == 1) {divMsg.innerHTML = ` Octal: ${octal}`}
+                if (select == 2) {divMsg.innerHTML += ` <br> Hexadecimal: ${hexadecimal}`}
+                if (select == 3) {divMsg.innerHTML += ` <br> Binario: ${binaria}`}
+        
+        
+        }
+
+        document.bgColor = "#BC8F8F";
+        </script>

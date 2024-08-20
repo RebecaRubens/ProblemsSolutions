@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>temperatura</title>
+</head>
+<body>
+    insira a temperatura atual: <input type="text" id="ipt_temp">
+    <button onclick="analisar()">analisar Temperatura</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function analisar() {
+        var temperatura = Number(ipt_temp.value);
+        if (temperatura <=14) {
+            div_mensagem.innerHTML = `Nossa! O tempo está congelante :O`
+        }
+        else if (temperatura <=21) {
+            div_mensagem.innerHTML= `Está frio, não esqueça o casaco ;)`
+        }
+        else if (temperatura <=24) {
+            div_mensagem.innerHTML= `O tempo está confortável, nem muito frio, nem muito calor`
+        }
+        else if (temperatura <=31) {
+            div_mensagem.innerHTML= `Hoje está calor, é melhor usar uma roupa fresca ;)`
+        }
+        else {
+            div_mensagem.innerHTML= `Eita! O tempo está escaldante :O`
+        }
+    }
+</script>
